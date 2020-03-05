@@ -7,3 +7,8 @@ spring:
     nacos:
       discovery:
         server-addr: 47.114.63.164:8848
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

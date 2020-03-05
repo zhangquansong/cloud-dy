@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: cloud-dy-admin
+  cloud:
+    nacos:
+      config:
+        server-addr: 47.114.63.164:8848
+        file-extension: yaml
+        prefix: cloud-dy-admin
+  profiles:
+    active: dev

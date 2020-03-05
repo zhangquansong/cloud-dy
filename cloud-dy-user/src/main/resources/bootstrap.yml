@@ -1,14 +1,4 @@
 spring:
-  rabbitmq:
-    host: 47.114.63.164 #localhost
-    port: 5672
-    redis:
-      host: 47.114.63.164 #"redis://192.168.241.152:6379" #127.0.0.1
-      port: 6379
-      database: 0
-      cluster:
-        nodes: 47.114.63.164:6379
-      password:
   application:
     name: cloud-dy-user
   cloud:
