@@ -1,0 +1,9 @@
+server:
+  port: 8095
+spring:
+  application:
+    name: cloud-dy-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.114.63.164:8848

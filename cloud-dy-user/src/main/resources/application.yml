@@ -1,0 +1,9 @@
+server:
+  port: 8782
+spring:
+  application:
+    name: cloud-dy-user
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.114.63.164:8848
