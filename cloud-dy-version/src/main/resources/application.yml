@@ -1,0 +1,14 @@
+server:
+  port: 8783
+spring:
+  application:
+    name: cloud-dy-version
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.114.63.164:8848
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
