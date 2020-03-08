@@ -1,5 +1,11 @@
 package com.cloud.dy.user;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cloud.dy.user.entity.User;
+import com.cloud.dy.user.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,11 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @SpringBootApplication
 @RestController
 @EnableDiscoveryClient
 @RefreshScope
 @EnableFeignClients
+@MapperScan(basePackages = {"com.cloud.dy.user.mapper"})
+@Slf4j
 public class CloudDyUserApplication {
 
     public static void main(String[] args) {
@@ -29,6 +39,9 @@ public class CloudDyUserApplication {
     RestTemplate restTemplate() {
         return new RestTemplate();
     }
+
+    @Autowired
+    private UserService userService;
 
     @Value("${version}")
     private String version;
@@ -43,6 +56,8 @@ public class CloudDyUserApplication {
 
     @RequestMapping("/getVersion")
     public String getVersion() {
-        return version;
+        log.info("version is : {}", version);
+        List<User> users = userService.listAll();
+        return JSONObject.toJSONString(users);
     }
 }
