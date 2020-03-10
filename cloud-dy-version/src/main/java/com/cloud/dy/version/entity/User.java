@@ -1,4 +1,4 @@
-package com.cloud.dy.user.entity;
+package com.cloud.dy.version.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

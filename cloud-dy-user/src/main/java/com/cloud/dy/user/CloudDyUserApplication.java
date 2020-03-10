@@ -55,8 +55,9 @@ public class CloudDyUserApplication {
     private int refillDuration;
 
     @RequestMapping("/getVersion")
-    public String getVersion() {
+    public String getVersion() throws Exception {
         log.info("version is : {}", version);
+        userService.saveUser();
         List<User> users = userService.listAll();
         return JSONObject.toJSONString(users);
     }
