@@ -1,4 +1,4 @@
-package com.cloud.dy.user;
+package com.cloud.dy.gateway;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;

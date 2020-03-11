@@ -1,4 +1,4 @@
-package com.cloud.dy.user.route;
+package com.cloud.dy.gateway.route;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;

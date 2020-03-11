@@ -17,6 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <docker.image.prefix>cloud-dy</docker.image.prefix>
+        <cloud.dy.common.util.version>0.0.1</cloud.dy.common.util.version>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
     </properties>
 
@@ -82,6 +83,11 @@
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
             <version>2.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cloud.dy</groupId>
+            <artifactId>cloud-dy-common-util</artifactId>
+            <version>${cloud.dy.common.util.version}</version>
         </dependency>
     </dependencies>
 

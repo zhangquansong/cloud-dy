@@ -1,10 +1,10 @@
-package com.cloud.dy.user.util;
+package com.cloud.dy.common.utils;
 
 /**
- * @Author zhangquansong
- * @Date 21:26 2020/3/7
- * @Description :   系统常量类
- * @return
+ * @ClassName : Constants
+ * @Author : zhangquansong
+ * @Date : 2019/1/5 0005 下午 3:16
+ * @Description :系统常量类
  **/
 public class Constants {
 

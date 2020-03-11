@@ -3,6 +3,7 @@ package com.cloud.dy.version;
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.dy.version.entity.User;
 import com.cloud.dy.version.service.UserService;
+import com.cloud.dy.version.util.CheckUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,15 @@ public class CloudDyVersionApplication {
         userService.saveUser();
         List<User> users = userService.listAll();
         return JSONObject.toJSONString(users);
+    }
+
+    @RequestMapping("/getUser")
+    public User getUser() throws Exception {
+        List<User> users = userService.listAll();
+        log.info("users is : {}", JSONObject.toJSONString(users));
+        if (CheckUtil.isEmpty(users)) {
+            return null;
+        }
+        return users.get(0);
     }
 }

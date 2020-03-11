@@ -24,6 +24,7 @@
         <mybatis.plus.version>2.1-gamma</mybatis.plus.version>
         <fastjson.version>1.2.31</fastjson.version>
         <mybatisplus.spring.boot.starter.version>1.0.5</mybatisplus.spring.boot.starter.version>
+        <cloud.dy.common.util.version>0.0.1</cloud.dy.common.util.version>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
     </properties>
 
@@ -163,6 +164,11 @@
             <groupId>org.mybatis.generator</groupId>
             <artifactId>mybatis-generator-core</artifactId>
             <version>1.3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cloud.dy</groupId>
+            <artifactId>cloud-dy-common-util</artifactId>
+            <version>${cloud.dy.common.util.version}</version>
         </dependency>
     </dependencies>
 
