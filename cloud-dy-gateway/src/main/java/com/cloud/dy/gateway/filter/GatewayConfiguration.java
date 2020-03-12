@@ -1,6 +1,20 @@
 package com.cloud.dy.gateway.filter;
 
 
+import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
+import com.alibaba.csp.sentinel.adapter.gateway.sc.exception.SentinelGatewayBlockExceptionHandler;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.codec.ServerCodecConfigurer;
+import org.springframework.web.reactive.result.view.ViewResolver;
+
+import java.util.Collections;
+import java.util.List;
+
 /**
  * @ClassName SentinelGatewayFilter
  * @Description TODO
@@ -8,10 +22,10 @@ package com.cloud.dy.gateway.filter;
  * @Date 2020/3/11 21:38
  * @Version 1.0
  **/
-//@Configuration
+@Configuration
 public class GatewayConfiguration {
 
-    /*private final List<ViewResolver> viewResolvers;
+    private final List<ViewResolver> viewResolvers;
     private final ServerCodecConfigurer serverCodecConfigurer;
 
     public GatewayConfiguration(ObjectProvider<List<ViewResolver>> viewResolversProvider,
@@ -31,5 +45,5 @@ public class GatewayConfiguration {
     @Order(-1)
     public GlobalFilter sentinelGatewayFilter() {
         return new SentinelGatewayFilter();
-    }*/
+    }
 }
