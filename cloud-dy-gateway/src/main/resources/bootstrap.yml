@@ -15,8 +15,8 @@ spring:
 
     sentinel:
       transport:
-        dashboard: 47.114.63.164:18485
-        port: 18485
+        dashboard: 47.110.77.37:8858
+        port: 8858
       # 服务启动直接建立心跳连接
       eager: true
 
