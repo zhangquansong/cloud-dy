@@ -40,6 +40,12 @@ spring:
     nacos:
       discovery:
         server-addr: 47.114.63.164:8848
+    sentinel:
+      transport:
+        dashboard: 47.110.77.37:8718
+        port: 8719
+      # 服务启动直接建立心跳连接
+      eager: true
 management:
   endpoints:
     web:

@@ -13,12 +13,27 @@ spring:
         file-extension: yaml
         prefix: cloud-dy-gateway
 
+#    sentinel:
+#      filter:
+#        # sentienl 默认生效，本地调试false
+#        enabled: true
+#      transport:
+#        dashboard: 47.110.77.37:8858
+#      # 饥饿加载
+#      eager: true
+
     sentinel:
       transport:
-        dashboard: 47.110.77.37:8858
-        port: 8858
+        dashboard: 47.110.77.37:8718
+        port: 8719
       # 服务启动直接建立心跳连接
       eager: true
+#      datasource:
+#        na:
+#          nacos:
+#            server-addr: 47.114.63.164:8848
+#            groupId: DEFAULT_GROUP
+#            dataId: ${spring.application.name}-${spring.profiles.active}-sentinel
 
   profiles:
     active: dev

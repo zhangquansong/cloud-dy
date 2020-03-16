@@ -1,5 +1,7 @@
 package com.cloud.dy.gateway;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.annotation.aspectj.SentinelResourceAspect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,6 +32,13 @@ public class CloudDyGatewayApplication {
         return new RestTemplate();
     }
 
+    // 注解支持的配置Bean
+    /*@Bean
+    public SentinelResourceAspect sentinelResourceAspect() {
+        return new SentinelResourceAspect();
+    }*/
+
+
     @Value("${version}")
     private String version;
     @Value("${cloudDream}")
@@ -41,8 +50,12 @@ public class CloudDyGatewayApplication {
     @Value("${refillDuration}")
     private int refillDuration;
 
+    @SentinelResource(
+            value = "getVersion"
+    )
     @RequestMapping("/getVersion")
     public String getVersion() {
         return version;
     }
+
 }

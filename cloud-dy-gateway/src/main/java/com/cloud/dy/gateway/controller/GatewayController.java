@@ -1,8 +1,11 @@
 package com.cloud.dy.gateway.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.dy.common.utils.R;
 import com.cloud.dy.gateway.entity.User;
+import com.cloud.dy.gateway.handler.DiscoveryClientControllerBackHandler;
+import com.cloud.dy.gateway.handler.DiscoveryClientControllerFallBackHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +27,28 @@ public class GatewayController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @SentinelResource(
+            value = "testgateway"
+    )
+    @RequestMapping("/testgateway")
+    public String getVersion() {
+        return "111";
+    }
+
     /**
      * @param
      * @Author zhangquansong
      * @Description : 查询所有用户列表
      * @Date 9:51 2020/3/11
      **/
+    @SentinelResource(
+            value = "client:fegin:test",
+            blockHandler = "defaultMessage",
+            fallback = "defaultMessage",
+            blockHandlerClass = DiscoveryClientControllerBackHandler.class
+//            ,
+//            fallbackClass = DiscoveryClientControllerFallBackHandler.class
+    )
     @GetMapping("/queryUser")
     @ResponseBody
     public R<User> listAll() {
