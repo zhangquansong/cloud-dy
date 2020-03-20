@@ -1,7 +1,8 @@
 package com.cloud.dy.gateway;
 
+import com.alibaba.cloud.sentinel.annotation.SentinelRestTemplate;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.alibaba.csp.sentinel.annotation.aspectj.SentinelResourceAspect;
+import jodd.exception.ExceptionUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,6 +28,7 @@ public class CloudDyGatewayApplication {
 
 
     @Bean
+    @SentinelRestTemplate(blockHandler = "handleException", blockHandlerClass = ExceptionUtil.class)
     @LoadBalanced
     RestTemplate restTemplate() {
         return new RestTemplate();
