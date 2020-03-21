@@ -28,7 +28,7 @@ public class CloudDyGatewayApplication {
 
 
     @Bean
-    @SentinelRestTemplate(blockHandler = "handleException", blockHandlerClass = ExceptionUtil.class)
+//    @SentinelRestTemplate(blockHandler = "handleException", blockHandlerClass = ExceptionUtil.class)
     @LoadBalanced
     RestTemplate restTemplate() {
         return new RestTemplate();
