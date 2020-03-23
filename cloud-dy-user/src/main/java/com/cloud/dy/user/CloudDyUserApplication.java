@@ -1,8 +1,6 @@
 package com.cloud.dy.user;
 
-import com.alibaba.cloud.sentinel.annotation.SentinelRestTemplate;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import jodd.exception.ExceptionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -18,13 +16,13 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.UUID;
 
+@Slf4j
 @SpringBootApplication
 @RestController
 @EnableDiscoveryClient
 @RefreshScope
 @EnableFeignClients
 @MapperScan(basePackages = {"com.cloud.dy.user.mapper"})
-@Slf4j
 public class CloudDyUserApplication {
 
     public static void main(String[] args) {
@@ -32,7 +30,7 @@ public class CloudDyUserApplication {
     }
 
     @Bean
-    @SentinelRestTemplate(blockHandler = "handleException", blockHandlerClass = ExceptionUtil.class)
+//    @SentinelRestTemplate(blockHandler = "handleException", blockHandlerClass = ExceptionUtil.class)
     @LoadBalanced
     RestTemplate restTemplate() {
         return new RestTemplate();

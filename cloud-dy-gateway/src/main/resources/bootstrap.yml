@@ -11,23 +11,10 @@ spring:
       config:
         server-addr: 47.110.77.37:8848
         file-extension: yaml
-        prefix: cloud-dy-gateway
 
 #    sentinel:
-#      filter:
-#        # sentienl 默认生效，本地调试false
-#        enabled: true
 #      transport:
-#        dashboard: 47.110.77.37:8858
-#      # 饥饿加载
-#      eager: true
-
-    sentinel:
-      transport:
-        dashboard: 47.110.77.37:8080
-        client-ip: 47.110.77.37
-        port: 8719
-      eager: true # 服务启动直接建立心跳连接
+#        dashboard: 47.110.77.37:8080
 
   profiles:
     active: dev

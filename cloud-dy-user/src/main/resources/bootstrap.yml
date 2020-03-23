@@ -11,12 +11,6 @@ spring:
         server-addr: 47.110.77.37:8848
         file-extension: yaml
         prefix: cloud-dy-user
-    sentinel:
-      transport:
-        dashboard: 47.110.77.37:8080
-        client-ip: 47.110.77.37
-        port: 8719
-      eager: true # 服务启动直接建立心跳连接
   profiles:
     active: dev
 feign:
