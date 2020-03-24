@@ -1,7 +1,7 @@
 package com.cloud.dy.version.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cloud.dy.version.entity.User;
+import com.cloud.dy.user.entity.User;
 
 /**
  * @Author zhangquansong
