@@ -1,5 +1,6 @@
 package com.cloud.dy.gateway.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.dy.common.utils.R;
 import com.cloud.dy.gateway.entity.User;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.UUID;
 
 /**
  * @Author zhangquansong
@@ -43,4 +46,11 @@ public class GatewayController {
         log.info("user is :{}", JSONObject.toJSONString(user));
         return R.successResponse(user);
     }
+
+    @GetMapping(value = "/test")
+    @SentinelResource(value = "test")
+    public String gatewaySentinel() {
+        return "Hello Gateway Test Sentinel : " + UUID.randomUUID();
+    }
+
 }

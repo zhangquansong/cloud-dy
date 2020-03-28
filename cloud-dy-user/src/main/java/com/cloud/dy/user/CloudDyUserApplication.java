@@ -36,10 +36,10 @@ public class CloudDyUserApplication {
         return new RestTemplate();
     }
 
-    @GetMapping(value = "/helloSentinel")
-    @SentinelResource("helloSentinel")
-    public String helloSentinel() {
-        return "Hello Sentinel" + UUID.randomUUID();
+    @GetMapping(value = "/userSentinel")
+    @SentinelResource("userSentinel")
+    public String userSentinel() {
+        return "Hello User Sentinel" + UUID.randomUUID();
     }
 
 }

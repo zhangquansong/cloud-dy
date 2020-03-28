@@ -7,6 +7,8 @@ package com.cloud.dy.gateway.handler;
  * @date 2020/3/150:00
  */
 
+import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.cloud.dy.gateway.entity.User;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -18,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DiscoveryClientControllerBackHandler {
 
-    /*public static String defaultMessage(BlockException e) {
+    public static String defaultMessage(BlockException e) {
 
         log.warn("DiscoveryClientControllerBackHandler  defaultMessage BlockException : {}", e);
         return "defaultMessage 服务限流，请稍后尝试";
@@ -28,5 +30,5 @@ public class DiscoveryClientControllerBackHandler {
 
         log.warn("DiscoveryClientControllerBackHandler  saveTx BlockException : {}", e);
         return "saveTx 服务限流，请稍后尝试";
-    }*/
+    }
 }
