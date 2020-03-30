@@ -8,7 +8,7 @@ package com.cloud.dy.version.handler;
  */
 
 import com.alibaba.csp.sentinel.slots.block.BlockException;
-import com.cloud.dy.user.entity.User;
+import com.cloud.dy.version.entity.User;
 import lombok.extern.slf4j.Slf4j;
 
 /**

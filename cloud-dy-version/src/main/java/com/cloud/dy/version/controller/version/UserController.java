@@ -1,9 +1,9 @@
-package com.cloud.dy.version.controller.user;
+package com.cloud.dy.version.controller.version;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.dy.common.utils.R;
-import com.cloud.dy.user.entity.User;
-import com.cloud.dy.version.service.UserService;
+import com.cloud.dy.user.service.UserService;
+import com.cloud.dy.version.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,8 +38,8 @@ public class UserController {
     @GetMapping("/queryList")
     @ResponseBody
     public R<List<User>> listAll() {
-        User user = restTemplate.getForObject("http://cloud-dy-version:8783/getUser1", User.class);
-        log.info("user is :{}", JSONObject.toJSONString(user));
+//        User user = restTemplate.getForObject("http://cloud-dy-version:8783/getUser", User.class);
+        log.info("user is :{}", JSONObject.toJSONString("xxxx"));
         return R.successResponse(userService.listAll());
     }
 }

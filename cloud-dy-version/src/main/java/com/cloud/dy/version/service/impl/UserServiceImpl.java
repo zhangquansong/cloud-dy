@@ -1,9 +1,9 @@
 package com.cloud.dy.version.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.cloud.dy.user.entity.User;
+import com.cloud.dy.user.service.UserService;
+import com.cloud.dy.version.entity.User;
 import com.cloud.dy.version.mapper.UserMapper;
-import com.cloud.dy.version.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,13 +38,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+//    @GlobalTransactional
     @Transactional
     public void saveUser() throws Exception {
         User user = new User();
         user.setUserLoginName("11");
         user.setUserName("22");
         java.util.Random rd = new java.util.Random();
-        int sj = rd.nextInt(2) + 1;
+        int sj = rd.nextInt(2) + 1;//因为是从0开始的，排除0就+1
         user.setUserSex(sj);
         this.save(user);
     }

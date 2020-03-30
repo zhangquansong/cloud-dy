@@ -1,7 +1,7 @@
-package com.cloud.dy.version.service;
+package com.cloud.dy.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cloud.dy.user.entity.User;
+import com.cloud.dy.version.entity.User;
 
 import java.util.List;
 

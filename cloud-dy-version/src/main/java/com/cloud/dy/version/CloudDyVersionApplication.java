@@ -36,10 +36,10 @@ public class CloudDyVersionApplication {
         return new RestTemplate();
     }
 
-    @GetMapping(value = "/helloVersionSentinel")
-    @SentinelResource("helloSentinel")
-    public String helloSentinel() {
-        return "Hello Sentinel" + UUID.randomUUID();
+    @GetMapping(value = "/versionSentinel")
+    @SentinelResource("versionSentinel")
+    public String userSentinel() {
+        return "Hello Version Sentinel" + UUID.randomUUID();
     }
 
 }

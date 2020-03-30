@@ -180,7 +180,7 @@
                 <configuration>
                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
                     <dockerDirectory>src/main/docker</dockerDirectory>
-                    <dockerHost>http://47.110.77.37:2375</dockerHost>
+                    <dockerHost>http://39.101.188.7:2375</dockerHost>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
