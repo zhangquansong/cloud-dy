@@ -1,6 +1,7 @@
 package com.cloud.dy.version.controller.version;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cloud.dy.common.utils.CheckUtil;
 import com.cloud.dy.common.utils.R;
 import com.cloud.dy.user.service.UserService;
 import com.cloud.dy.version.entity.User;
@@ -41,5 +42,17 @@ public class UserController {
 //        User user = restTemplate.getForObject("http://cloud-dy-version:8783/getUser", User.class);
         log.info("user is :{}", JSONObject.toJSONString("xxxx"));
         return R.successResponse(userService.listAll());
+    }
+
+    @GetMapping("/getUser")
+    @ResponseBody
+    public R<User> getUser() throws Exception {
+        userService.saveUser();
+        List<User> users = userService.listAll();
+        if (CheckUtil.isEmpty(users)) {
+            return null;
+        }
+        log.info("user is :{}", JSONObject.toJSONString(users));
+        return R.successResponse(users.get(0));
     }
 }

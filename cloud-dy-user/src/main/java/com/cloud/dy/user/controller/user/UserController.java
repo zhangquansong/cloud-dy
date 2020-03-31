@@ -3,6 +3,7 @@ package com.cloud.dy.user.controller.user;
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.dy.common.utils.R;
 import com.cloud.dy.user.entity.User;
+import com.cloud.dy.user.fallback.UserFeignClientFallback;
 import com.cloud.dy.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private UserFeignClientFallback userFeignClientFallback;
 
     /**
      * @param
@@ -38,8 +41,18 @@ public class UserController {
     @GetMapping("/queryList")
     @ResponseBody
     public R<List<User>> listAll() {
-        User user = restTemplate.getForObject("http://cloud-dy-version:8783/getUser", User.class);
+        R<User> user = restTemplate.getForObject("http://cloud-dy-version:8783/version/getUser", R.class);
         log.info("user is :{}", JSONObject.toJSONString(user));
         return R.successResponse(userService.listAll());
     }
+
+    @GetMapping("/userFeign")
+    @ResponseBody
+    public R<User> userFeign() {
+        R<User> user = userFeignClientFallback.getUser();
+        log.info("user is :{}", JSONObject.toJSONString(user));
+        return user;
+    }
+
+
 }
