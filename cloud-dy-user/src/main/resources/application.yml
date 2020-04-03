@@ -12,3 +12,16 @@ management:
     web:
       exposure:
         include: '*'
+
+xxl:
+  job:
+    executor:
+      address:
+      logpath: logs/xxl-job/jobhandler
+      appname: cloud-dy-user-xxl-job-executor
+      port: 9999
+      logretentiondays: -1
+      ip:
+    admin:
+      addresses: http://39.101.188.7:8780/xxl-job-admin
+    accessToken:

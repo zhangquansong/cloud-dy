@@ -144,10 +144,13 @@
         </snapshotRepository>-->
 
         <repository>
-            <id>snapshots</id>
-            <name>my repository group</name>
-            <url>http://127.0.0.1:8081/repository/snapshots/</url>
+            <id>releases</id>
+            <url>http://39.101.188.7:8081/content/repositories/releases</url>
         </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://39.101.188.7:8081/content/repositories/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>
 
 </project>

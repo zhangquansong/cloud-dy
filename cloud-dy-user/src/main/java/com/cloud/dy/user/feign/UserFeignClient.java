@@ -4,7 +4,8 @@ import com.cloud.dy.common.utils.R;
 import com.cloud.dy.user.entity.User;
 import com.cloud.dy.user.fallback.UserFeignClientFallback;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @ClassName UserFeignClient
@@ -17,6 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface UserFeignClient {
 
 
-    @GetMapping("/version/getUser")
+    @RequestMapping(value = "/version/getUser", method = RequestMethod.GET)
     R<User> getUser();
 }
