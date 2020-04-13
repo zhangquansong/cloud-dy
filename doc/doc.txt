@@ -1,0 +1,102 @@
+# 项目 docker-compose.yml :
+
+version: '3'
+services:
+  xxl-job-admin:              #自定义服务名--注册中心
+    hostname: xxl-job-admin
+    image: cloud-dy/xxl-job-admin        #镜像名称
+    ports:
+      - "8780:8780"            #映射的端口
+    environment:               #环境变量
+      SERVER_PORT: "8780"      #自定义参数用于给服务的配置文件传递参数  
+    network_mode: "host"
+
+  cloud-dy-gateway:              #自定义服务名--注册中心
+    hostname: cloud-dy-gateway
+    image: cloud-dy/cloud-dy-gateway        #镜像名称
+    ports:
+      - "8095:8095"            #映射的端口
+    environment:               #环境变量
+      SERVER_PORT: "8095"      #自定义参数用于给服务的配置文件传递参数  
+    network_mode: "host"         
+
+  cloud-dy-user:              #自定义服务名--注册中心
+    hostname: cloud-dy-user
+    image: cloud-dy/cloud-dy-user        #镜像名称
+    ports:
+      - "8782:8782"            #映射的端口
+    environment:               #环境变量
+      SERVER_PORT: "8782"      #自定义参数用于给服务的配置文件传递参数  
+    network_mode: "host"             
+      
+  cloud-dy-version:              #自定义服务名--注册中心
+    hostname: cloud-dy-version
+    image: cloud-dy/cloud-dy-version        #镜像名称
+    ports:
+      - "8783:8783"            #映射的端口
+    environment:               #环境变量
+      SERVER_PORT: "8783"      #自定义参数用于给服务的配置文件传递参数  
+    network_mode: "host"     
+
+
+
+
+###################################################################################################################
+
+
+# sentinel-dashboard Dockerfile :
+
+
+
+FROM openjdk:8
+
+ENV SENTINEL_HOME /opt/sentinel-dashboard
+
+RUN mkdir -p ${SENTINEL_HOME}
+
+COPY sentinel-dashboard.jar ${SENTINEL_HOME}
+
+RUN chmod -R +x ${SENTINEL_HOME}/*jar
+
+WORKDIR ${SENTINEL_HOME}
+
+EXPOSE 8080
+
+EXPOSE 8718
+
+EXPOSE 8719
+
+EXPOSE 8720
+
+CMD java ${JAVA_OPTS} -jar sentinel-dashboard.jar
+
+
+###################################################################################################################
+
+
+# sentinel-dashboard docker-compose.yml :
+
+
+
+
+version: '3'
+services:
+  sentinel-dashboard:
+    image: v-sentinel-dashboard
+    container_name: sentinel-dashboard
+    restart: on-failure
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "8718:8718"
+      - "8719:8719"
+      - "8720:8720"
+    environment:
+      - JAVA_OPTS=-Dserver.port=8080 -Dcsp.sentinel.dashboard.server=47.110.77.37:8080 -Dproject.name=sentinel-dashboard -Djava.security.egd=file:/dev/./urandom -Dcsp.sentinel.api.port=8720
+    volumes:
+      - /var/log/sentinel-dashboard:/root/logs/csp
+    network_mode: "host"
+
+
