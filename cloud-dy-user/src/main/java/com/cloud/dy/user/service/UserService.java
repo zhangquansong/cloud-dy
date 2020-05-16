@@ -60,4 +60,23 @@ public interface UserService extends IService<User> {
      * @Date 17:19 2019/7/13
      **/
     User findById(Long id);
+
+    /**
+     * @param phone
+     * @return com.cloud.dy.user.entity.User
+     * @Author zhangquansong
+     * @Description : 根据手机号查询用户信息
+     * @Date 15:26 2020/5/16
+     **/
+    User queryByPhone(String phone);
+
+    /**
+     * @param phone
+     * @param password
+     * @return com.cloud.dy.user.entity.User
+     * @Author zhangquansong
+     * @Description : 根据用户名密码查询用户信息
+     * @Date 15:29 2020/5/16
+     **/
+    User queryByPhoneAndPassword(String phone, String password);
 }

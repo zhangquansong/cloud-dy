@@ -1,6 +1,8 @@
 package com.cloud.dy.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cloud.dy.common.utils.CheckUtil;
 import com.cloud.dy.user.entity.User;
 import com.cloud.dy.user.mapper.UserMapper;
 import com.cloud.dy.user.service.UserService;
@@ -45,7 +47,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setUserLoginName("11");
         user.setUserName("22");
         java.util.Random rd = new java.util.Random();
-        int sj = rd.nextInt(2)+1;//因为是从0开始的，排除0就+1
+        int sj = rd.nextInt(2) + 1;//因为是从0开始的，排除0就+1
         user.setUserSex(sj);
         this.save(user);
     }
@@ -98,5 +100,40 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return this.findById(id);
     }
 
+    /**
+     * @param phone
+     * @return com.cloud.dy.user.entity.User
+     * @Author zhangquansong
+     * @Description : 根据手机号查询用户信息
+     * @Date 15:26 2020/5/16
+     **/
+    @Override
+    public User queryByPhone(String phone) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("id","user_password").eq("user_phone", phone);
+        List<User> users = userMapper.selectList(queryWrapper);
+        if (CheckUtil.isEmpty(users)) {
+            return null;
+        }
+        return users.get(0);
+    }
 
+    /**
+     * @param phone
+     * @param password
+     * @return com.cloud.dy.user.entity.User
+     * @Author zhangquansong
+     * @Description : 根据用户名密码查询用户信息
+     * @Date 15:29 2020/5/16
+     **/
+    @Override
+    public User queryByPhoneAndPassword(String phone, String password) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("id").eq("user_phone", phone).eq("user_password", password);
+        List<User> users = userMapper.selectList(queryWrapper);
+        if (CheckUtil.isEmpty(users)) {
+            return null;
+        }
+        return users.get(0);
+    }
 }

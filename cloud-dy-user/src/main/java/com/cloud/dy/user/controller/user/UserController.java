@@ -1,16 +1,17 @@
 package com.cloud.dy.user.controller.user;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.dy.common.utils.R;
 import com.cloud.dy.user.entity.User;
 import com.cloud.dy.user.fallback.UserFeignClientFallback;
+import com.cloud.dy.user.param.LoginParam;
+import com.cloud.dy.user.service.UserExtService;
 import com.cloud.dy.user.service.UserService;
+import com.cloud.dy.user.vo.LoginVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -27,6 +28,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserExtService userExtService;
     @Autowired
     private RestTemplate restTemplate;
     @Autowired
@@ -54,5 +57,10 @@ public class UserController {
         return user;
     }
 
-
+    @PostMapping("/login")
+    @SentinelResource("login")
+    @ResponseBody
+    public R<LoginVO> login(@RequestBody LoginParam param) {
+        return userExtService.login(param);
+    }
 }

@@ -1,8 +1,8 @@
 <template>
     <div id="login" class="container">
         <el-form :model="formData" :rules="formRule" ref="formData">
-            <el-form-item prop="username">
-                <el-input name="username" v-model="formData.username" placeholder="请输入用户名" auto-complete="on"></el-input>
+            <el-form-item prop="phone">
+                <el-input name="phone" v-model="formData.phone" placeholder="请输入用户名" auto-complete="on"></el-input>
             </el-form-item>
 
             <el-form-item prop="password">
@@ -30,23 +30,29 @@ export default {
     }
     return {
       formData: {
-            username: "",
+            phone: "",
             password: ""
           },
        formRule: {
-           username: [{required: true, trigger: 'blur', validator: validateUserName}],
+           phone: [{required: true, trigger: 'blur', validator: validateUserName}],
           }
       }
   },
 
   methods: {
       handleSubmit(){
+      console.log(this.formData);
               queryUser(this.formData).then(response => {
                   console.log(response.data);
-                  //if (response.data.data) {
-                  //}
-                  setTimeout(() => {
-                  }, 0.5 * 1000);
+                  if(response.data.code==0){
+                   this.$router.push({path: '/menu'})
+                  return;
+                  }else{
+                  this.$message({
+                        type: 'error',
+                        message: response.data.message
+                    });
+                  }
               })
           }
   },
