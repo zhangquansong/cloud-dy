@@ -63,4 +63,11 @@ public class UserController {
     public R<LoginVO> login(@RequestBody LoginParam param) {
         return userExtService.login(param);
     }
+
+    @GetMapping("/info")
+    @SentinelResource("info")
+    @ResponseBody
+    public R<String> info(@RequestParam("token") String token) {
+        return R.successResponse();
+    }
 }
