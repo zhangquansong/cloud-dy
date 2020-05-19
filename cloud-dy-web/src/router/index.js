@@ -11,6 +11,7 @@ import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
+import userRouter from './modules/user'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -74,7 +75,6 @@ export const constantRoutes = [
     path: '',
     component: Layout,
     redirect: 'dashboard',
-    hidden: false,
     children: [
       {
         path: 'dashboard',
@@ -84,6 +84,7 @@ export const constantRoutes = [
       }
     ]
   },
+  userRouter,
   {
     path: '/documentation',
     component: Layout,
