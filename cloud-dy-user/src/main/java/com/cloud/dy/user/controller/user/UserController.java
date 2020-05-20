@@ -4,7 +4,7 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.dy.common.utils.R;
 import com.cloud.dy.user.entity.User;
-import com.cloud.dy.user.fallback.UserFeignClientFallback;
+import com.cloud.dy.user.feign.UserFeignClient;
 import com.cloud.dy.user.param.LoginParam;
 import com.cloud.dy.user.service.UserExtService;
 import com.cloud.dy.user.service.UserService;
@@ -33,7 +33,7 @@ public class UserController {
     @Autowired
     private RestTemplate restTemplate;
     @Autowired
-    private UserFeignClientFallback userFeignClientFallback;
+    private UserFeignClient userFeignClient;
 
     /**
      * @param
@@ -51,11 +51,19 @@ public class UserController {
 
     @GetMapping("/userFeign")
     @ResponseBody
-    public R<User> userFeign() {
-        R<User> user = userFeignClientFallback.getUser();
+    public R<com.cloud.dy.clients.vo.User> userFeign() {
+        R<com.cloud.dy.clients.vo.User> user = userFeignClient.getUser();
         log.info("user is :{}", JSONObject.toJSONString(user));
         return user;
     }
+
+    /*@GetMapping("/userFeign")
+    @ResponseBody
+    public R<User> userFeign() {
+        R<User> user = userFeignClient.getUser();
+        log.info("user is :{}", JSONObject.toJSONString(user));
+        return user;
+    }*/
 
     @PostMapping("/login")
     @SentinelResource("login")
@@ -70,4 +78,5 @@ public class UserController {
     public R<String> info(@RequestParam("token") String token) {
         return R.successResponse();
     }
+
 }
