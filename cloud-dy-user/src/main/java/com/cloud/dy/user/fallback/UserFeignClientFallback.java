@@ -6,13 +6,13 @@ import com.cloud.dy.user.feign.UserFeignClient;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserFeignClientFallback implements UserFeignClient {
+public class UserFeignClientFallback /*implements UserFeignClient*/ {
 
-    @Override
+    /*@Override
     public R<User> getUser() {
         return R.errorResponse();
     }
-
+*/
     /*@Override
     public R<User> getUser() {
         return R.errorResponse();

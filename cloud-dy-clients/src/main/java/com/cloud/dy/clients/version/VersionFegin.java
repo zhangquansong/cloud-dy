@@ -1,9 +1,11 @@
 package com.cloud.dy.clients.version;
 
 
+import com.cloud.dy.clients.param.GetVersionParam;
 import com.cloud.dy.clients.vo.User;
 import com.cloud.dy.common.utils.R;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @ClassName VersionFegin
@@ -14,6 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
  **/
 public interface VersionFegin {
 
-    @GetMapping(value = "/version/getUser")
-    R<User> getUser();
+    @GetMapping(value = "/version/getVersion")
+    R<User> getVersion(@RequestBody GetVersionParam getVersionParam);
 }

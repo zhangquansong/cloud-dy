@@ -2,6 +2,8 @@ package com.cloud.dy.user.controller.user;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSONObject;
+import com.cloud.dy.clients.param.GetVersionParam;
+import com.cloud.dy.clients.version.VersionFegin;
 import com.cloud.dy.common.utils.R;
 import com.cloud.dy.user.entity.User;
 import com.cloud.dy.user.feign.UserFeignClient;
@@ -24,7 +26,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController implements VersionFegin {
 
     @Autowired
     private UserService userService;
@@ -52,9 +54,9 @@ public class UserController {
     @GetMapping("/userFeign")
     @ResponseBody
     public R<com.cloud.dy.clients.vo.User> userFeign() {
-        R<com.cloud.dy.clients.vo.User> user = userFeignClient.getUser();
-        log.info("user is :{}", JSONObject.toJSONString(user));
-        return user;
+        GetVersionParam getVersionParam = new GetVersionParam();
+        getVersionParam.setId(1);
+        return getVersion(getVersionParam);
     }
 
     /*@GetMapping("/userFeign")
@@ -79,4 +81,10 @@ public class UserController {
         return R.successResponse();
     }
 
+    @Override
+    public R<com.cloud.dy.clients.vo.User> getVersion(GetVersionParam getVersionParam) {
+        R<com.cloud.dy.clients.vo.User> user = userFeignClient.getVersion(getVersionParam);
+        log.info("user is :{}", JSONObject.toJSONString(user));
+        return user;
+    }
 }

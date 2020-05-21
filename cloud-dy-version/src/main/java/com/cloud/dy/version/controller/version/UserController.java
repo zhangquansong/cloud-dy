@@ -1,16 +1,14 @@
 package com.cloud.dy.version.controller.version;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cloud.dy.clients.param.GetVersionParam;
 import com.cloud.dy.common.utils.CheckUtil;
 import com.cloud.dy.common.utils.R;
 import com.cloud.dy.user.service.UserService;
 import com.cloud.dy.version.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -47,7 +45,19 @@ public class UserController {
     @GetMapping("/getUser")
     @ResponseBody
     public R<User> getUser() throws Exception {
-        userService.saveUser();
+//        userService.saveUser();
+        List<User> users = userService.listAll();
+        if (CheckUtil.isEmpty(users)) {
+            return null;
+        }
+        log.info("user is :{}", JSONObject.toJSONString(users));
+        return R.successResponse(users.get(0));
+    }
+
+    @GetMapping("/getVersion")
+    @ResponseBody
+    public R<User> getVersion(@RequestBody GetVersionParam getVersionParam) throws Exception {
+        log.info("getVersionParam : {}", JSONObject.toJSONString(getVersionParam));
         List<User> users = userService.listAll();
         if (CheckUtil.isEmpty(users)) {
             return null;

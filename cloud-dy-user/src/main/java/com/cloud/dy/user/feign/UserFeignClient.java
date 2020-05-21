@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @Date 2020/3/31 19:51
  * @Version 1.0
  **/
-@FeignClient(name = "cloud-dy-version", fallback = UserFeignClientFallback.class)
+@FeignClient(name = "cloud-dy-version"/*, fallback = UserFeignClientFallback.class*/)
 public interface UserFeignClient extends VersionFegin {
 
 
