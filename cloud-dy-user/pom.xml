@@ -218,6 +218,8 @@
                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
                     <dockerDirectory>src/main/docker</dockerDirectory>
                     <dockerHost>http://39.101.188.7:2375</dockerHost>
+                    <!--指定pem证书文件路径地址 -->
+<!--                    <dockerCertPath>${project.basedir}/src/main/docker</dockerCertPath>-->
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
