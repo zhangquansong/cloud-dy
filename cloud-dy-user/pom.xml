@@ -29,12 +29,17 @@
     </properties>
 
     <dependencies>
-        <dependency>
+        <!--<dependency>
             <groupId>com.cloud.dy</groupId>
             <artifactId>cloud-dy-clients</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
 
+        <dependency>
+            <groupId>com.cloud.dy</groupId>
+            <artifactId>cloud-dy-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -219,7 +224,7 @@
                     <dockerDirectory>src/main/docker</dockerDirectory>
                     <dockerHost>http://39.101.188.7:2375</dockerHost>
                     <!--指定pem证书文件路径地址 -->
-<!--                    <dockerCertPath>${project.basedir}/src/main/docker</dockerCertPath>-->
+                    <!--                    <dockerCertPath>${project.basedir}/src/main/docker</dockerCertPath>-->
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>

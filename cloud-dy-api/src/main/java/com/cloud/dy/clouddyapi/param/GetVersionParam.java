@@ -1,4 +1,4 @@
-package com.cloud.dy.clients.param;
+package com.cloud.dy.clouddyapi.param;
 
 import lombok.Data;
 

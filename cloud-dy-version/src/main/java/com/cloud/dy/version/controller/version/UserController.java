@@ -1,7 +1,7 @@
 package com.cloud.dy.version.controller.version;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cloud.dy.clients.param.GetVersionParam;
+import com.cloud.dy.clouddyapi.param.GetVersionParam;
 import com.cloud.dy.common.utils.CheckUtil;
 import com.cloud.dy.common.utils.R;
 import com.cloud.dy.user.service.UserService;
@@ -54,7 +54,7 @@ public class UserController {
         return R.successResponse(users.get(0));
     }
 
-    @GetMapping("/getVersion")
+    /*@PostMapping("/getVersion")
     @ResponseBody
     public R<User> getVersion(@RequestBody GetVersionParam getVersionParam) throws Exception {
         log.info("getVersionParam : {}", JSONObject.toJSONString(getVersionParam));
@@ -64,5 +64,5 @@ public class UserController {
         }
         log.info("user is :{}", JSONObject.toJSONString(users));
         return R.successResponse(users.get(0));
-    }
+    }*/
 }

@@ -1,4 +1,4 @@
-package com.cloud.dy.clients.vo;
+package com.cloud.dy.clouddyapi.vo;
 
 import lombok.Data;
 import lombok.ToString;
