@@ -26,6 +26,6 @@ spring:
             rule-type: flow
   profiles:
     active: dev
-feign:
-  sentinel:
-    enabled: true
+#feign:
+#  sentinel:
+#    enabled: true

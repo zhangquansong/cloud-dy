@@ -1,4 +1,4 @@
-package com.cloud.dy.clouddyapi.param;
+package com.cloud.dy.versionapi.param;
 
 import lombok.Data;
 
@@ -12,5 +12,5 @@ import java.io.Serializable;
  **/
 @Data
 public class GetVersionParam implements Serializable {
-    private Integer id;
+    private String type;
 }

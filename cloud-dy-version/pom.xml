@@ -31,7 +31,7 @@
     <dependencies>
         <dependency>
             <groupId>com.cloud.dy</groupId>
-            <artifactId>cloud-dy-api</artifactId>
+            <artifactId>cloud-dy-version-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

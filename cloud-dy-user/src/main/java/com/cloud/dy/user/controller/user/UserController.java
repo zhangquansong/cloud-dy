@@ -2,20 +2,17 @@ package com.cloud.dy.user.controller.user;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSONObject;
-import com.cloud.dy.clouddyapi.param.GetVersionParam;
 import com.cloud.dy.common.utils.R;
-import com.cloud.dy.user.entity.User;
-import com.cloud.dy.user.feign.UserFeignClient;
+import com.cloud.dy.user.feign.GetVersionFeignClient;
 import com.cloud.dy.user.param.LoginParam;
 import com.cloud.dy.user.service.UserExtService;
 import com.cloud.dy.user.service.UserService;
 import com.cloud.dy.user.vo.LoginVO;
+import com.cloud.dy.versionapi.param.GetVersionParam;
+import com.cloud.dy.versionapi.vo.GetVersionVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 /**
  * @Author zhangquansong
@@ -24,7 +21,7 @@ import java.util.List;
  **/
 @Slf4j
 @RestController
-//@RequestMapping("/user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -32,39 +29,15 @@ public class UserController {
     @Autowired
     private UserExtService userExtService;
     @Autowired
-    private RestTemplate restTemplate;
-    @Autowired
-    private UserFeignClient userFeignClient;
+    private GetVersionFeignClient getVersionFeignClient;
 
-    /**
-     * @param
-     * @Author zhangquansong
-     * @Description : 查询所有用户列表
-     * @Date 9:51 2020/3/11
-     **/
-    @GetMapping("/queryList")
+
+    @PostMapping("/getVersion")
     @ResponseBody
-    public R<List<User>> listAll() {
-        R<User> user = restTemplate.getForObject("http://cloud-dy-version:8783/version/getUser", R.class);
-        log.info("user is :{}", JSONObject.toJSONString(user));
-        return R.successResponse(userService.listAll());
+    public R<GetVersionVO> getVersion(@RequestBody GetVersionParam getVersionParam) {
+        log.info("user service getVersionParam :{} ", JSONObject.toJSONString(getVersionParam));
+        return getVersionFeignClient.getVersion(getVersionParam);
     }
-
-    @PostMapping("/userFeign")
-    @ResponseBody
-    public R<com.cloud.dy.clouddyapi.vo.User> userFeign() {
-        GetVersionParam getVersionParam = new GetVersionParam();
-        getVersionParam.setId(1);
-        return null;
-    }
-
-    /*@GetMapping("/userFeign")
-    @ResponseBody
-    public R<User> userFeign() {
-        R<User> user = userFeignClient.getUser();
-        log.info("user is :{}", JSONObject.toJSONString(user));
-        return user;
-    }*/
 
     @PostMapping("/login")
     @SentinelResource("login")
