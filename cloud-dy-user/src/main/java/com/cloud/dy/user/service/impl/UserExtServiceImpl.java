@@ -4,14 +4,17 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cloud.dy.common.utils.CheckUtil;
 import com.cloud.dy.common.utils.R;
 import com.cloud.dy.user.entity.User;
+import com.cloud.dy.user.feign.VersionFeignClient;
 import com.cloud.dy.user.mapper.UserMapper;
 import com.cloud.dy.user.param.LoginParam;
 import com.cloud.dy.user.service.UserExtService;
 import com.cloud.dy.user.service.UserService;
 import com.cloud.dy.user.vo.LoginVO;
+import com.cloud.dy.versionapi.param.SaveVersionParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Author zhangquansong
@@ -26,6 +29,9 @@ public class UserExtServiceImpl extends ServiceImpl<UserMapper, User> implements
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private VersionFeignClient versionFeignClient;
 
     /**
      * @return com.cloud.dy.user.entity.User
@@ -46,6 +52,21 @@ public class UserExtServiceImpl extends ServiceImpl<UserMapper, User> implements
         if (CheckUtil.isEmpty(user)) {
             return R.errorResponse(100002, "用户不存在");
         }*/
+        return R.successResponse();
+    }
+
+    @Transactional
+    @Override
+    public R<Boolean> saveVersion(SaveVersionParam saveVersionParam) {
+        User user = new User();
+        user.setUserLoginName("11");
+        user.setUserName("22");
+        java.util.Random rd = new java.util.Random();
+        int sj = rd.nextInt(2) + 1;//因为是从0开始的，排除0就+1
+        user.setUserSex(sj);
+        userService.saveUser(user);
+        versionFeignClient.saveVersion(saveVersionParam);
+        int i = 1 / 0;
         return R.successResponse();
     }
 }

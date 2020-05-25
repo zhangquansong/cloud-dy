@@ -5,6 +5,7 @@ import com.cloud.dy.common.utils.R;
 import com.cloud.dy.user.entity.User;
 import com.cloud.dy.user.param.LoginParam;
 import com.cloud.dy.user.vo.LoginVO;
+import com.cloud.dy.versionapi.param.SaveVersionParam;
 
 /**
  * @Author zhangquansong
@@ -14,4 +15,6 @@ import com.cloud.dy.user.vo.LoginVO;
  **/
 public interface UserExtService extends IService<User> {
     R<LoginVO> login(LoginParam param);
+
+    R<Boolean> saveVersion(SaveVersionParam saveVersionParam);
 }

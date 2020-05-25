@@ -8,7 +8,7 @@ package com.cloud.dy.version.handler;
  */
 
 import com.alibaba.csp.sentinel.slots.block.BlockException;
-import com.cloud.dy.version.entity.User;
+import com.cloud.dy.version.entity.Version;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -26,7 +26,7 @@ public class DiscoveryClientControllerBackHandler {
         return "defaultMessage 服务限流，请稍后尝试";
     }
 
-    public static String saveTx(User entity, BlockException e) {
+    public static String saveTx(Version entity, BlockException e) {
 
         log.warn("DiscoveryClientControllerBackHandler  saveTx BlockException : {}", e);
         return "saveTx 服务限流，请稍后尝试";

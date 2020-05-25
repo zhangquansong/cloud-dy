@@ -1,7 +1,7 @@
 package com.cloud.dy.version.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cloud.dy.version.entity.User;
+import com.cloud.dy.version.entity.Version;
 
 /**
  * @Author zhangquansong
@@ -9,6 +9,6 @@ import com.cloud.dy.version.entity.User;
  * @Description :    用户mapper
  * @return
  **/
-public interface UserMapper extends BaseMapper<User> {
+public interface VersionMapper extends BaseMapper<Version> {
 
 }

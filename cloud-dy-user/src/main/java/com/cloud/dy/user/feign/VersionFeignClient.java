@@ -1,7 +1,7 @@
 package com.cloud.dy.user.feign;
 
 import com.cloud.dy.user.fallback.GetVersionFeignClientFallback;
-import com.cloud.dy.versionapi.api.GetVersionFegin;
+import com.cloud.dy.versionapi.api.VersionFegin;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
@@ -12,6 +12,6 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @Version 1.0
  **/
 @FeignClient(name = "cloud-dy-version", fallback = GetVersionFeignClientFallback.class)
-public interface GetVersionFeignClient extends GetVersionFegin {
+public interface VersionFeignClient extends VersionFegin {
 
 }

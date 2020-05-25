@@ -3,12 +3,13 @@ package com.cloud.dy.user.controller.user;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.dy.common.utils.R;
-import com.cloud.dy.user.feign.GetVersionFeignClient;
+import com.cloud.dy.user.feign.VersionFeignClient;
 import com.cloud.dy.user.param.LoginParam;
 import com.cloud.dy.user.service.UserExtService;
 import com.cloud.dy.user.service.UserService;
 import com.cloud.dy.user.vo.LoginVO;
 import com.cloud.dy.versionapi.param.GetVersionParam;
+import com.cloud.dy.versionapi.param.SaveVersionParam;
 import com.cloud.dy.versionapi.vo.GetVersionVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class UserController {
     @Autowired
     private UserExtService userExtService;
     @Autowired
-    private GetVersionFeignClient getVersionFeignClient;
+    private VersionFeignClient getVersionFeignClient;
 
 
     @PostMapping("/getVersion")
@@ -38,6 +39,13 @@ public class UserController {
         log.info("user service getVersionParam :{} ", JSONObject.toJSONString(getVersionParam));
         return getVersionFeignClient.getVersion(getVersionParam);
     }
+
+    @PostMapping("/saveVersion")
+    @ResponseBody
+    public R<Boolean> saveVersion(@RequestBody SaveVersionParam saveVersionParam) {
+        return userExtService.saveVersion(saveVersionParam);
+    }
+
 
     @PostMapping("/login")
     @SentinelResource("login")
