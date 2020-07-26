@@ -7,9 +7,9 @@ import com.cloud.dy.version.service.VersionService;
 import com.cloud.dy.versionapi.param.GetVersionParam;
 import com.cloud.dy.versionapi.param.SaveVersionParam;
 import com.cloud.dy.versionapi.vo.GetVersionVO;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +32,7 @@ public class VersionController {
 
 
     @PostMapping(value = "/save")
-    @Transactional
+    @GlobalTransactional
     public R<Boolean> saveVersion(@RequestBody SaveVersionParam saveVersionParam) {
         Version version = new Version();
         java.util.Random rd = new java.util.Random();

@@ -65,8 +65,8 @@ public class UserExtServiceImpl extends ServiceImpl<UserMapper, User> implements
         int sj = rd.nextInt(2) + 1;//因为是从0开始的，排除0就+1
         user.setUserSex(sj);
         userService.saveUser(user);
-        versionFeignClient.saveVersion(saveVersionParam);
-        int i = 1 / 0;
+        R<Boolean> booleanR = versionFeignClient.saveVersion(saveVersionParam);
+//        int i = 1 / 0;
         return R.successResponse();
     }
 }

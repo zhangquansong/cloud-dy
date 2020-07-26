@@ -26,9 +26,31 @@
         <mybatisplus.spring.boot.starter.version>1.0.5</mybatisplus.spring.boot.starter.version>
         <cloud.dy.common.util.version>0.0.1</cloud.dy.common.util.version>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <seata.version>1.2.0</seata.version>
     </properties>
 
     <dependencies>
+        <!--Seata 包-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+            <version>2.2.0.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.seata</groupId>
+                    <artifactId>seata-all</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.seata</groupId>
+                    <artifactId>seata-spring-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-spring-boot-starter</artifactId>
+            <version>1.2.0</version>
+        </dependency>
         <dependency>
             <groupId>com.cloud.dy</groupId>
             <artifactId>cloud-dy-version-api</artifactId>
@@ -77,6 +99,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>2.2.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -100,30 +123,30 @@
             <optional>true</optional>
         </dependency>
         <!--mysql-->
-        <dependency>
+       <!-- <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!--Mybatis-Plus-->
+        &lt;!&ndash;Mybatis-Plus&ndash;&gt;
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.1.1</version>
         </dependency>
-        <!--shardingsphere start-->
-        <!-- for spring boot -->
+        &lt;!&ndash;shardingsphere start&ndash;&gt;
+        &lt;!&ndash; for spring boot &ndash;&gt;
         <dependency>
             <groupId>io.shardingsphere</groupId>
             <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
             <version>3.1.0</version>
         </dependency>
-        <!-- for spring namespace -->
+        &lt;!&ndash; for spring namespace &ndash;&gt;
         <dependency>
             <groupId>io.shardingsphere</groupId>
             <artifactId>sharding-jdbc-spring-namespace</artifactId>
             <version>3.1.0</version>
-        </dependency>
+        </dependency>-->
         <!--shardingsphere end-->
         <dependency>
             <groupId>org.mybatis.generator</groupId>
@@ -147,6 +170,35 @@
             <groupId>com.xuxueli</groupId>
             <artifactId>xxl-job-core</artifactId>
             <version>2.2.0-SNAPSHOT</version>
+        </dependency>
+
+        <!--mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.47</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- mybatisPlus 核心库 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <!-- 引入阿里数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.6</version>
         </dependency>
     </dependencies>
 
