@@ -36,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      **/
     @Override
     public List<User> listAll() {
-        return this.list(null);
+        return this.listAll();
     }
 
     @Override
@@ -110,7 +110,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public User queryByPhone(String phone) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("id","user_password").eq("user_phone", phone);
+        queryWrapper.eq("user_phone", phone);
         List<User> users = userMapper.selectList(queryWrapper);
         if (CheckUtil.isEmpty(users)) {
             return null;
@@ -129,7 +129,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public User queryByPhoneAndPassword(String phone, String password) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("id").eq("user_phone", phone).eq("user_password", password);
+        queryWrapper.eq("user_phone", phone).eq("user_password", password);
         List<User> users = userMapper.selectList(queryWrapper);
         if (CheckUtil.isEmpty(users)) {
             return null;
