@@ -9,8 +9,8 @@ spring:
         server-addr: 47.110.77.37:8848
   # 配置数据源
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://rm-8vb9p9sf9i777kv2k7o.mysql.zhangbei.rds.aliyuncs.com:3306/dy0?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-8vb9p9sf9i777kv2k7o.mysql.zhangbei.rds.aliyuncs.com:3306/dy0?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
     username: cloud_dy_mysql
     password: Songmei11
     type: com.alibaba.druid.pool.DruidDataSource
@@ -40,16 +40,3 @@ management:
     web:
       exposure:
         include: '*'
-
-seata:
-  application-id: ${spring.application.name} # Seata 应用名称，默认使用 ${spring.application.name}
-  tx-service-group: default # Seata 事务组, 高版本没找到相关配置, 是否可配置未知 选用默认default
-  # 服务配置项
-  service:
-    # 虚拟组和分组的映射 1.0.0以上好像将vgroup-mapping 改为 vgroupMapping, 此处是否影响未测试
-    vgroupMapping:
-      # 此处Key对应 tx-service-group 的 Value, 此处 value 默认 default
-      default: default
-    # 分组和 Seata 服务的映射 默认端口8091
-    grouplist:
-      default: 127.0.0.1:8091

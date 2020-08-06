@@ -14,7 +14,6 @@ import com.cloud.dy.versionapi.param.SaveVersionParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Author zhangquansong
@@ -55,7 +54,7 @@ public class UserExtServiceImpl extends ServiceImpl<UserMapper, User> implements
         return R.successResponse();
     }
 
-    @Transactional
+    //    @GlobalTransactional
     @Override
     public R<Boolean> saveVersion(SaveVersionParam saveVersionParam) {
         User user = new User();

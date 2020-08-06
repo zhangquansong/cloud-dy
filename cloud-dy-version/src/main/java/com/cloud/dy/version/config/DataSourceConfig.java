@@ -1,13 +1,6 @@
 package com.cloud.dy.version.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import io.seata.rm.datasource.DataSourceProxy;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-
-import javax.sql.DataSource;
 
 /**
  * 数据源配置
@@ -17,22 +10,17 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-    @Bean
+    /*@Bean
     @ConfigurationProperties(prefix = "spring.datasource")
-    public DruidDataSource druidDataSource() {
+    public DataSource dataSource() {
         return new DruidDataSource();
     }
 
-    /**
-     * 需要将 DataSourceProxy 设置为主数据源，否则事务无法回滚
-     *
-     * @param druidDataSource The DruidDataSource
-     * @return The default datasource
-     */
-    @Primary
     @Bean("dataSource")
-    public DataSource dataSource(DruidDataSource druidDataSource) {
-        return new DataSourceProxy(druidDataSource);
-    }
+    @Primary
+    public DataSourceProxy dataSourceProxy(DataSource dataSource) {
+        return new DataSourceProxy(dataSource);
+    }*/
+
 }
 

@@ -30,27 +30,7 @@
     </properties>
 
     <dependencies>
-        <!--Seata 包-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
-            <version>2.2.0.RELEASE</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.seata</groupId>
-                    <artifactId>seata-all</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.seata</groupId>
-                    <artifactId>seata-spring-boot-starter</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>io.seata</groupId>
-            <artifactId>seata-spring-boot-starter</artifactId>
-            <version>1.2.0</version>
-        </dependency>
+
         <dependency>
             <groupId>com.cloud.dy</groupId>
             <artifactId>cloud-dy-version-api</artifactId>
@@ -123,30 +103,30 @@
             <optional>true</optional>
         </dependency>
         <!--mysql-->
-       <!-- <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        &lt;!&ndash;Mybatis-Plus&ndash;&gt;
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.1.1</version>
-        </dependency>
-        &lt;!&ndash;shardingsphere start&ndash;&gt;
-        &lt;!&ndash; for spring boot &ndash;&gt;
-        <dependency>
-            <groupId>io.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        &lt;!&ndash; for spring namespace &ndash;&gt;
-        <dependency>
-            <groupId>io.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-spring-namespace</artifactId>
-            <version>3.1.0</version>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>mysql</groupId>
+             <artifactId>mysql-connector-java</artifactId>
+             <scope>runtime</scope>
+         </dependency>
+         &lt;!&ndash;Mybatis-Plus&ndash;&gt;
+         <dependency>
+             <groupId>com.baomidou</groupId>
+             <artifactId>mybatis-plus-boot-starter</artifactId>
+             <version>3.1.1</version>
+         </dependency>
+         &lt;!&ndash;shardingsphere start&ndash;&gt;
+         &lt;!&ndash; for spring boot &ndash;&gt;
+         <dependency>
+             <groupId>io.shardingsphere</groupId>
+             <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+             <version>3.1.0</version>
+         </dependency>
+         &lt;!&ndash; for spring namespace &ndash;&gt;
+         <dependency>
+             <groupId>io.shardingsphere</groupId>
+             <artifactId>sharding-jdbc-spring-namespace</artifactId>
+             <version>3.1.0</version>
+         </dependency>-->
         <!--shardingsphere end-->
         <dependency>
             <groupId>org.mybatis.generator</groupId>
@@ -176,7 +156,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.47</version>
+            <version>8.0.19</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -215,6 +195,13 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>0.9.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.2.0.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
