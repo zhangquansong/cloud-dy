@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.3.RELEASE</version>
+        <version>2.2.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.cloud.dy</groupId>
@@ -25,7 +25,7 @@
         <fastjson.version>1.2.31</fastjson.version>
         <mybatisplus.spring.boot.starter.version>1.0.5</mybatisplus.spring.boot.starter.version>
         <cloud.dy.common.util.version>0.0.1</cloud.dy.common.util.version>
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <spring-cloud.version>Hoxton.RC1</spring-cloud.version>
         <seata.version>1.2.0</seata.version>
     </properties>
 
@@ -72,10 +72,10 @@
             <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
             <version>0.9.0.RELEASE</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
