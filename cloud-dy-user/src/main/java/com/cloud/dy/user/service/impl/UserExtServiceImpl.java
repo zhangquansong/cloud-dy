@@ -11,6 +11,7 @@ import com.cloud.dy.user.service.UserExtService;
 import com.cloud.dy.user.service.UserService;
 import com.cloud.dy.user.vo.LoginVO;
 import com.cloud.dy.versionapi.param.SaveVersionParam;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,7 +55,7 @@ public class UserExtServiceImpl extends ServiceImpl<UserMapper, User> implements
         return R.successResponse();
     }
 
-    //    @GlobalTransactional
+    @GlobalTransactional
     @Override
     public R<Boolean> saveVersion(SaveVersionParam saveVersionParam) {
         User user = new User();

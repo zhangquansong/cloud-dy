@@ -1,6 +1,14 @@
 package com.cloud.dy.version.config;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import io.seata.rm.datasource.DataSourceProxy;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+import javax.sql.DataSource;
+
 
 /**
  * 数据源配置
@@ -10,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DataSourceConfig {
 
-    /*@Bean
+    @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
         return new DruidDataSource();
@@ -20,7 +28,8 @@ public class DataSourceConfig {
     @Primary
     public DataSourceProxy dataSourceProxy(DataSource dataSource) {
         return new DataSourceProxy(dataSource);
-    }*/
+    }
+
 
 }
 

@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.UUID;
 
 @Slf4j
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @RestController
 @EnableDiscoveryClient
 @RefreshScope
