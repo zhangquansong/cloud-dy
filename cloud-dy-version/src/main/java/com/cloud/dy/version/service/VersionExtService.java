@@ -8,7 +8,7 @@ import com.cloud.dy.version.entity.Version;
  * @Description :     用户基本操作CURD接口
  * @return
  **/
-public interface VersionService {
+public interface VersionExtService {
 
 
     void saveVersion(Version version);

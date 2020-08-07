@@ -1,6 +1,5 @@
 package com.cloud.dy.version.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cloud.dy.version.entity.Version;
 import com.cloud.dy.version.mapper.VersionMapper;
 import com.cloud.dy.version.service.VersionService;
@@ -16,17 +15,13 @@ import org.springframework.stereotype.Service;
  **/
 @Slf4j
 @Service
-public class VersionServiceImpl extends ServiceImpl<VersionMapper, Version> implements VersionService {
-
+public class VersionServiceImpl implements VersionService {
 
     @Autowired
-    private VersionMapper userMapper;
-
+    private VersionMapper versionMapper;
 
     @Override
-    public void saveVersion(Version verion) {
-        this.save(verion);
+    public void saveVersion(Version version) {
+        versionMapper.insert(version);
     }
-
-
 }

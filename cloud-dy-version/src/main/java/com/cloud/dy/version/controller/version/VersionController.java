@@ -2,7 +2,7 @@ package com.cloud.dy.version.controller.version;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.dy.common.utils.R;
-import com.cloud.dy.version.entity.Version;
+import com.cloud.dy.version.service.VersionExtService;
 import com.cloud.dy.version.service.VersionService;
 import com.cloud.dy.versionapi.param.GetVersionParam;
 import com.cloud.dy.versionapi.param.SaveVersionParam;
@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class VersionController {
     @Autowired
     private VersionService versionService;
+    @Autowired
+    private VersionExtService versionExtService;
 
     @PostMapping(value = "/getVersion")
     public R<GetVersionVO> getVersion(@RequestBody GetVersionParam getVersionParam) {
@@ -34,12 +36,7 @@ public class VersionController {
     @PostMapping(value = "/save")
     @Transactional
     public R<Boolean> saveVersion(@RequestBody SaveVersionParam saveVersionParam) {
-        Version version = new Version();
-        java.util.Random rd = new java.util.Random();
-        int sj = rd.nextInt(2) + 1;//因为是从0开始的，排除0就+1
-        version.setVersion(String.valueOf(sj));
-        version.setNum(sj);
-        versionService.saveVersion(version);
+        versionExtService.saveVersion(null);
         return R.successResponse(Boolean.TRUE);
     }
 }

@@ -1,14 +1,30 @@
 package com.cloud.dy.version.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cloud.dy.version.entity.Version;
+import com.cloud.dy.version.entity.VersionExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-/**
- * @Author zhangquansong
- * @Date 21:20 2020/3/7
- * @Description :    用户mapper
- * @return
- **/
-public interface VersionMapper extends BaseMapper<Version> {
+public interface VersionMapper {
+    long countByExample(VersionExample example);
 
+    int deleteByExample(VersionExample example);
+
+    int deleteByPrimaryKey(Long id);
+
+    int insert(Version record);
+
+    int insertSelective(Version record);
+
+    List<Version> selectByExample(VersionExample example);
+
+    Version selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") Version record, @Param("example") VersionExample example);
+
+    int updateByExample(@Param("record") Version record, @Param("example") VersionExample example);
+
+    int updateByPrimaryKeySelective(Version record);
+
+    int updateByPrimaryKey(Version record);
 }

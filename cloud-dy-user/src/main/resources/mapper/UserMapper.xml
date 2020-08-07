@@ -1,35 +1,414 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloud.dy.user.mapper.UserMapper">
-
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cloud.dy.user.entity.User">
-        <id column="id" property="id"/>
-        <result column="user_login_name" property="userLoginName"/>
-        <result column="user_name" property="userName"/>
-        <result column="user_phone" property="userPhone"/>
-        <result column="user_sex" property="userSex"/>
-        <result column="user_id_card" property="userIdCard"/>
-        <result column="user_face" property="userFace"/>
-        <result column="user_code" property="userCode"/>
-        <result column="user_type" property="userType"/>
-        <result column="user_password" property="userPassword"/>
-        <result column="user_asset" property="userAsset"/>
-        <result column="user_address" property="userAddress"/>
-        <result column="user_longin_last_time" property="userLonginLastTime"/>
-        <result column="user_status" property="userStatus"/>
-        <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
-        <result column="user_version" property="userVersion"/>
-    </resultMap>
-
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, user_login_name AS userLoginName, user_name AS userName, user_phone AS userPhone, user_sex AS userSex,
-        user_id_card AS userIdCard, user_face AS userFace, user_code AS userCode, user_type AS userType, user_password
-        AS userPassword, user_asset AS userAsset, user_address AS userAddress, user_longin_last_time AS
-        userLonginLastTime, user_status AS userStatus, create_time AS createTime, update_time AS updateTime,
-        user_version AS userVersion
-    </sql>
-
+  <resultMap id="BaseResultMap" type="com.cloud.dy.user.entity.User">
+    <id column="user_id" jdbcType="BIGINT" property="id" />
+    <result column="user_user_login_name" jdbcType="VARCHAR" property="userLoginName" />
+    <result column="user_user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_user_sex" jdbcType="INTEGER" property="userSex" />
+    <result column="user_user_id_card" jdbcType="VARCHAR" property="userIdCard" />
+    <result column="user_user_face" jdbcType="VARCHAR" property="userFace" />
+    <result column="user_user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="user_user_type" jdbcType="INTEGER" property="userType" />
+    <result column="user_user_password" jdbcType="VARCHAR" property="userPassword" />
+    <result column="user_user_asset" jdbcType="DECIMAL" property="userAsset" />
+    <result column="user_user_address" jdbcType="VARCHAR" property="userAddress" />
+    <result column="user_user_longin_last_time" jdbcType="TIMESTAMP" property="userLonginLastTime" />
+    <result column="user_user_status" jdbcType="INTEGER" property="userStatus" />
+    <result column="user_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="user_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="user_is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="user_user_version" jdbcType="BIGINT" property="userVersion" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user.id as user_id, user.user_login_name as user_user_login_name, user.user_name as user_user_name, 
+    user.user_phone as user_user_phone, user.user_sex as user_user_sex, user.user_id_card as user_user_id_card, 
+    user.user_face as user_user_face, user.user_code as user_user_code, user.user_type as user_user_type, 
+    user.user_password as user_user_password, user.user_asset as user_user_asset, user.user_address as user_user_address, 
+    user.user_longin_last_time as user_user_longin_last_time, user.user_status as user_user_status, 
+    user.create_time as user_create_time, user.update_time as user_update_time, user.is_delete as user_is_delete, 
+    user.user_version as user_user_version
+  </sql>
+  <select id="selectByExample" parameterType="com.cloud.dy.user.entity.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user user
+    where user.id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cloud.dy.user.entity.UserExample">
+    delete from user user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.cloud.dy.user.entity.User" useGeneratedKeys="true">
+    insert into user (user_login_name, user_name, user_phone, 
+      user_sex, user_id_card, user_face, 
+      user_code, user_type, user_password, 
+      user_asset, user_address, user_longin_last_time, 
+      user_status, create_time, update_time, 
+      is_delete, user_version)
+    values (#{userLoginName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{userSex,jdbcType=INTEGER}, #{userIdCard,jdbcType=VARCHAR}, #{userFace,jdbcType=VARCHAR}, 
+      #{userCode,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userAsset,jdbcType=DECIMAL}, #{userAddress,jdbcType=VARCHAR}, #{userLonginLastTime,jdbcType=TIMESTAMP}, 
+      #{userStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=INTEGER}, #{userVersion,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.cloud.dy.user.entity.User" useGeneratedKeys="true">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userLoginName != null">
+        user_login_name,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userSex != null">
+        user_sex,
+      </if>
+      <if test="userIdCard != null">
+        user_id_card,
+      </if>
+      <if test="userFace != null">
+        user_face,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="userPassword != null">
+        user_password,
+      </if>
+      <if test="userAsset != null">
+        user_asset,
+      </if>
+      <if test="userAddress != null">
+        user_address,
+      </if>
+      <if test="userLonginLastTime != null">
+        user_longin_last_time,
+      </if>
+      <if test="userStatus != null">
+        user_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="userVersion != null">
+        user_version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userLoginName != null">
+        #{userLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=INTEGER},
+      </if>
+      <if test="userIdCard != null">
+        #{userIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userFace != null">
+        #{userFace,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userAsset != null">
+        #{userAsset,jdbcType=DECIMAL},
+      </if>
+      <if test="userAddress != null">
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userLonginLastTime != null">
+        #{userLonginLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="userVersion != null">
+        #{userVersion,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cloud.dy.user.entity.UserExample" resultType="java.lang.Long">
+    select count(*) from user user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user user
+    <set>
+      <if test="record.id != null">
+        user.id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userLoginName != null">
+        user.user_login_name = #{record.userLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user.user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null">
+        user.user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSex != null">
+        user.user_sex = #{record.userSex,jdbcType=INTEGER},
+      </if>
+      <if test="record.userIdCard != null">
+        user.user_id_card = #{record.userIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userFace != null">
+        user.user_face = #{record.userFace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userCode != null">
+        user.user_code = #{record.userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null">
+        user.user_type = #{record.userType,jdbcType=INTEGER},
+      </if>
+      <if test="record.userPassword != null">
+        user.user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAsset != null">
+        user.user_asset = #{record.userAsset,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userAddress != null">
+        user.user_address = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLonginLastTime != null">
+        user.user_longin_last_time = #{record.userLonginLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userStatus != null">
+        user.user_status = #{record.userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        user.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        user.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null">
+        user.is_delete = #{record.isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="record.userVersion != null">
+        user.user_version = #{record.userVersion,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user user
+    set user.id = #{record.id,jdbcType=BIGINT},
+      user.user_login_name = #{record.userLoginName,jdbcType=VARCHAR},
+      user.user_name = #{record.userName,jdbcType=VARCHAR},
+      user.user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      user.user_sex = #{record.userSex,jdbcType=INTEGER},
+      user.user_id_card = #{record.userIdCard,jdbcType=VARCHAR},
+      user.user_face = #{record.userFace,jdbcType=VARCHAR},
+      user.user_code = #{record.userCode,jdbcType=VARCHAR},
+      user.user_type = #{record.userType,jdbcType=INTEGER},
+      user.user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user.user_asset = #{record.userAsset,jdbcType=DECIMAL},
+      user.user_address = #{record.userAddress,jdbcType=VARCHAR},
+      user.user_longin_last_time = #{record.userLonginLastTime,jdbcType=TIMESTAMP},
+      user.user_status = #{record.userStatus,jdbcType=INTEGER},
+      user.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      user.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      user.is_delete = #{record.isDelete,jdbcType=INTEGER},
+      user.user_version = #{record.userVersion,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cloud.dy.user.entity.User">
+    update user
+    <set>
+      <if test="userLoginName != null">
+        user_login_name = #{userLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        user_sex = #{userSex,jdbcType=INTEGER},
+      </if>
+      <if test="userIdCard != null">
+        user_id_card = #{userIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userFace != null">
+        user_face = #{userFace,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="userPassword != null">
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userAsset != null">
+        user_asset = #{userAsset,jdbcType=DECIMAL},
+      </if>
+      <if test="userAddress != null">
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userLonginLastTime != null">
+        user_longin_last_time = #{userLonginLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStatus != null">
+        user_status = #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="userVersion != null">
+        user_version = #{userVersion,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cloud.dy.user.entity.User">
+    update user
+    set user_login_name = #{userLoginName,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_sex = #{userSex,jdbcType=INTEGER},
+      user_id_card = #{userIdCard,jdbcType=VARCHAR},
+      user_face = #{userFace,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=INTEGER},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_asset = #{userAsset,jdbcType=DECIMAL},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      user_longin_last_time = #{userLonginLastTime,jdbcType=TIMESTAMP},
+      user_status = #{userStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      user_version = #{userVersion,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 </mapper>
