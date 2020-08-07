@@ -100,10 +100,16 @@
             <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
             <version>0.9.0.RELEASE</version>
         </dependency>
-        <!-- <dependency>
+         <dependency>
              <groupId>org.springframework.boot</groupId>
              <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
-         </dependency>-->
+             <exclusions>
+                 <exclusion>
+                     <groupId>org.springframework.boot</groupId>
+                     <artifactId>spring-boot-starter-data-redis</artifactId>
+                 </exclusion>
+             </exclusions>
+         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -279,13 +285,13 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.3</version>
+                <version>0.4.13</version>
                 <configuration>
                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
                     <dockerDirectory>src/main/docker</dockerDirectory>
-                    <dockerHost>http://39.101.188.7:2375</dockerHost>
+                    <dockerHost>https://39.101.188.7:2375</dockerHost>
                     <!--指定pem证书文件路径地址 -->
-                    <!--                    <dockerCertPath>${project.basedir}/src/main/docker</dockerCertPath>-->
+                    <dockerCertPath>${project.basedir}/src/main/docker</dockerCertPath>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
