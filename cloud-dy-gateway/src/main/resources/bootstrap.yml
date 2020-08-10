@@ -11,6 +11,8 @@ spring:
       config:
         server-addr: 47.110.77.37:8848
         file-extension: yaml
+        group: DY_GROUP
+        namespace: 4e55b399-5def-480e-b0f6-ad22097e96e7
     sentinel:
       transport:
         dashboard: 47.110.77.37:8080
@@ -21,7 +23,7 @@ spring:
         na:
           nacos:
             server-addr: ${spring.cloud.nacos.config.server-addr}
-            groupId: DEFAULT_GROUP
+            groupId: DY_GROUP
             dataId: ${spring.application.name}-${spring.profiles.active}-sentinel
             rule-type: flow
 

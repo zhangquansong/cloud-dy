@@ -31,9 +31,11 @@ import java.util.concurrent.Executor;
 @Component
 public class NacosDynamicRouteService implements ApplicationEventPublisherAware {
 
-    private String dataId = "gateway-router";
+    @Value("${nacos.dynamic.route.dataId}")
+    private String dataId;
 
-    private String group = "DEFAULT_GROUP";
+    @Value("${nacos.dynamic.route.group}")
+    private String group;
 
     @Value("${spring.cloud.nacos.config.server-addr}")
     private String serverAddr;
