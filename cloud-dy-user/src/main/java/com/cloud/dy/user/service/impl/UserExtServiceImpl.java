@@ -34,7 +34,7 @@ public class UserExtServiceImpl implements UserExtService {
         user.setUserName("22");
         userService.saveUser(user);
         versionFeignClient.saveVersion(saveVersionParam);
-        Integer i = 1 / 0;
+//        Integer i = 1 / 0;
         return R.successResponse();
     }
 
