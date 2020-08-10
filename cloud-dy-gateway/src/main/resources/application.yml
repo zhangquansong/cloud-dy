@@ -12,3 +12,10 @@ management:
     web:
       exposure:
         include: '*'
+
+logging:
+  level:
+    org.springframework.cloud.gateway: trace
+    org.springframework.http.server.reactive: debug
+    org.springframework.web.reactive: debug
+    reactor.ipc.netty: debug
