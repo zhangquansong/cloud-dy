@@ -44,7 +44,7 @@ public class CloudDyUserApplication {
     @GetMapping(value = "/userSentinel")
     @SentinelResource("userSentinel")
     public String userSentinel() {
-        log.info("====###port:{}", serverPort);
+        log.error("====###port:{}", serverPort);
         return "Hello User Sentinel" + UUID.randomUUID();
     }
 

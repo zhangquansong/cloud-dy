@@ -1,15 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="false" scan="true" scanPeriod="1 seconds">
-    <include resource="org/springframework/boot/logging/logback/base.xml" />
-    <contextName>logback</contextName>
+<configuration debug="false" scan="true" scanPeriod="30 seconds">
+    <!--定义日志文件名称 -->
+    <property name="LOG_FILE_NAME" value="test"/>
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
+    <property name="LOG_HOME" value="./logs"/>
+    <!-- 日志备份目录 -->
+    <property name="BACKUP_HOME" value="${LOG_HOME}/backup"/>
+    <!-- 日志文件名称时间格式化 -->
+    <timestamp key="FILE_DATEFORMAT" datePattern="yyyy-MM-dd" />
+    <!-- 彩色日志 -->
+    <!-- 彩色日志依赖的渲染  类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+    <!-- 日志文件名称时间格式化 -->
+    <timestamp key="FILE_DATEFORMAT" datePattern="yyyy-MM-dd"/>
+
+    <!-- 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 输出日志并压缩-每天滚动并压缩 -->
+    <appender name="DAILY_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${LOG_FILE_NAME}.log</file>
+        <!-- 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件。-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--表示什么周期触发一次生成新的日志文件-->
+            <FileNamePattern>${BACKUP_HOME}/${LOG_FILE_NAME}.%d{yyyyMMdd}.%i.log.zip</FileNamePattern>
+            <!-- 当天的日志大小 超过${log.max.size}时,压缩日志并保存 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!--%i表示当超过指定大小500MB时,文件名会+1-->
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!--表示日志最多保存30天-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%-5thread] %msg%n</pattern>
+        </layout>
+    </appender>
+    <!-- 按照syslog协议输出日志到网络端口 -->
+    <appender name="SYSLOG" class="ch.qos.logback.classic.net.SyslogAppender">
+        <syslogHost>127.0.0.1</syslogHost>
+        <port>514</port>
+        <facility>USER</facility>
+        <suffixPattern>
+            log-0[123]: [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%-5thread] %msg%n
+        </suffixPattern>
+    </appender>
 
     <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <destination>127.0.0.1:4560</destination>
         <!-- encoder必须配置,有多种可选 -->
         <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
-
-    <root level="info">
+    <!-- 日志输出级别 -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="SYSLOG" />
         <appender-ref ref="stash" />
     </root>
 </configuration>
