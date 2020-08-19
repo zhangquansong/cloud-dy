@@ -29,6 +29,7 @@ public class UserExtServiceImpl implements UserExtService {
     @GlobalTransactional
     @Override
     public R saveUser(SaveVersionParam saveVersionParam) {
+        log.info("---> start save user <---");
         User user = new User();
         user.setUserLoginName("11");
         user.setUserName("22");

@@ -25,6 +25,7 @@ public class VersionExtServiceImpl implements VersionExtService {
     @Transactional
     @Override
     public void saveVersion(Version verion) {
+        log.info("---> start save version <---");
         Version version = new Version();
         java.util.Random rd = new java.util.Random();
         int sj = rd.nextInt(2) + 1;//因为是从0开始的，排除0就+1
