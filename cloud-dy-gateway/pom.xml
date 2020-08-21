@@ -123,6 +123,12 @@
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-datasource-nacos</artifactId>
         </dependency>
+
+        <!--<dependency>
+            <groupId>co.elastic.apm</groupId>
+            <artifactId>apm-agent-attach</artifactId>
+            <version>1.11.0</version>
+        </dependency>-->
     </dependencies>
 
     <dependencyManagement>

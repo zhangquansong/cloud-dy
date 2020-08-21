@@ -1,5 +1,6 @@
 package com.cloud.dy.version;
 
+import co.elastic.apm.attach.ElasticApmAttacher;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
@@ -27,6 +28,8 @@ import java.util.UUID;
 public class CloudDyVersionApplication {
 
     public static void main(String[] args) {
+        // 重点，调用ElasticApmAttacher.attach();函数
+        ElasticApmAttacher.attach();
         SpringApplication.run(CloudDyVersionApplication.class, args);
     }
 

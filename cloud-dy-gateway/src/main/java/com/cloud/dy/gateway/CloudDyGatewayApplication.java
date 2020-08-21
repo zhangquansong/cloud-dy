@@ -22,6 +22,8 @@ import java.util.UUID;
 public class CloudDyGatewayApplication {
 
     public static void main(String[] args) {
+        // 重点，调用ElasticApmAttacher.attach();函数
+//        ElasticApmAttacher.attach();
         SpringApplication.run(CloudDyGatewayApplication.class, args);
     }
 
