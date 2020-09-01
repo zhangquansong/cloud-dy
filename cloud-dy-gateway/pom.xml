@@ -195,11 +195,18 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.13</version>
                 <configuration>
-                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <volumes>
+                        <volume>/tmp</volume>
+                    </volumes>
+                    <imageName>${docker.image.prefix}/${artifactId}:${project.version}</imageName>
+                    <!--指定基础镜像-->
+                    <baseImage>frolvlad/alpine-oraclejre8:latest</baseImage>
                     <dockerHost>https://39.101.188.7:2375</dockerHost>
                     <!--指定pem证书文件路径地址 -->
                     <dockerCertPath>${project.basedir}/src/main/docker</dockerCertPath>
+                    <entryPoint>
+                        ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/${project.build.finalName}.jar"]
+                    </entryPoint>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
@@ -207,6 +214,9 @@
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
+                    <exposes>
+                        <expose>8095</expose>
+                    </exposes>
                 </configuration>
             </plugin>
 
@@ -217,6 +227,7 @@
                     <skipTests>true</skipTests>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
