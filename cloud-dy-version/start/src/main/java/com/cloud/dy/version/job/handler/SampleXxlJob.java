@@ -5,6 +5,7 @@ import com.xxl.job.core.handler.IJobHandler;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import com.xxl.job.core.log.XxlJobLogger;
 import com.xxl.job.core.util.ShardingUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author xuxueli 2019-12-11 21:52:51
  */
+@Slf4j
 @Component
 public class SampleXxlJob {
     private static Logger logger = LoggerFactory.getLogger(SampleXxlJob.class);
@@ -38,6 +40,7 @@ public class SampleXxlJob {
      */
     @XxlJob("demoJobHandler")
     public ReturnT<String> demoJobHandler(String param) throws Exception {
+        log.info("xxl job demoJobHandler : {} ", param);
         XxlJobLogger.log("XXL-JOB, Hello World.");
 
         for (int i = 0; i < 5; i++) {

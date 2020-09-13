@@ -1,6 +1,5 @@
 package com.cloud.dy.version;
 
-import co.elastic.apm.attach.ElasticApmAttacher;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
@@ -33,7 +32,7 @@ public class CloudDyVersionApplication {
 
     public static void main(String[] args) {
         // 重点，调用ElasticApmAttacher.attach();函数
-        ElasticApmAttacher.attach();
+//        ElasticApmAttacher.attach();
         SpringApplication.run(CloudDyVersionApplication.class, args);
     }
 
@@ -44,12 +43,12 @@ public class CloudDyVersionApplication {
     }
 
     @GetMapping(value = "/versionSentinel")
-    @SentinelResource("userSentinel")
-    public String userSentinel() {
+    @SentinelResource("versionSentinel")
+    public String versionSentinel() {
         log.info("====info###port:{}", serverPort);
         log.warn("====warn###port:{}", serverPort);
         log.error("====error###port:{}", serverPort);
-        return "Hello User Sentinel" + UUID.randomUUID();
+        return "Hello version66 Sentinel" + UUID.randomUUID();
     }
 
 }

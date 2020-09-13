@@ -1,6 +1,5 @@
 package com.cloud.dy.user;
 
-import co.elastic.apm.attach.ElasticApmAttacher;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
@@ -33,7 +32,7 @@ public class CloudDyUserApplication {
 
     public static void main(String[] args) {
         // 重点，调用ElasticApmAttacher.attach();函数
-        ElasticApmAttacher.attach();
+//        ElasticApmAttacher.attach();
         SpringApplication.run(CloudDyUserApplication.class, args);
     }
 

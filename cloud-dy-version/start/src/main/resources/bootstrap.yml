@@ -31,3 +31,8 @@ spring:
 #feign:
 #  sentinel:
 #    enabled: true
+
+
+logging:
+  level:
+    org.springframework.web.servlet: trace

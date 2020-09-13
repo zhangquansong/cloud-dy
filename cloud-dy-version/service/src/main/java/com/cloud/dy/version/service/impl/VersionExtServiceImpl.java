@@ -31,6 +31,8 @@ public class VersionExtServiceImpl implements VersionExtService {
         int sj = rd.nextInt(2) + 1;//因为是从0开始的，排除0就+1
         version.setVersion(String.valueOf(sj));
         version.setNum(sj);
+//        log.error("1/0,,,,");
+//        int i = 1 / 0;
         versionService.saveVersion(version);
     }
 

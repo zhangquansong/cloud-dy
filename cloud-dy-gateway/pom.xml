@@ -198,7 +198,7 @@
                     <volumes>
                         <volume>/tmp</volume>
                     </volumes>
-                    <imageName>${docker.image.prefix}/${artifactId}:${project.version}</imageName>
+                    <imageName>${docker.image.prefix}/${artifactId}</imageName>
                     <!--指定基础镜像-->
                     <baseImage>frolvlad/alpine-oraclejre8:latest</baseImage>
                     <dockerHost>https://39.101.188.7:2375</dockerHost>

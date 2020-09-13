@@ -25,7 +25,7 @@
     <properties>
         <java.version>1.8</java.version>
         <docker.image.prefix>cloud-dy</docker.image.prefix>
-        <docker.image.name>cloud-dy-user-start</docker.image.name>
+        <docker.image.name>cloud-dy-user</docker.image.name>
         <druid.version>1.1.9</druid.version>
         <mysql.connector.java.version>5.1.3</mysql.connector.java.version>
         <com.github.pagehelper.version>4.1.0</com.github.pagehelper.version>
