@@ -12,6 +12,7 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -19,12 +20,13 @@ import org.springframework.web.client.RestTemplate;
 import java.util.UUID;
 
 @Slf4j
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class},scanBasePackages = "com.cloud.dy.user")
 @RestController
 @EnableDiscoveryClient
 @RefreshScope
 @EnableFeignClients
-@MapperScan(basePackages = {"com.cloud.dy.user.mapper"})
+//@MapperScan(basePackages = {"com.cloud.dy.user"})
+@MapperScan("com.cloud.dy.user.mapper")
 public class CloudDyUserApplication {
 
     @Value("${server.port}")

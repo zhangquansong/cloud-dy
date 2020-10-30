@@ -1,5 +1,6 @@
 package com.cloud.dy.version.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cloud.dy.version.entity.Version;
 import com.cloud.dy.version.service.VersionExtService;
 import com.cloud.dy.version.service.VersionService;
@@ -24,15 +25,14 @@ public class VersionExtServiceImpl implements VersionExtService {
 
     @Transactional
     @Override
-    public void saveVersion(Version verion) {
+    public void saveVersion(Version version) {
         log.info("---> start save version <---");
-        Version version = new Version();
         java.util.Random rd = new java.util.Random();
-        int sj = rd.nextInt(2) + 1;//因为是从0开始的，排除0就+1
-        version.setVersion(String.valueOf(sj));
+        int sj = rd.nextInt(2);//因为是从0开始的，排除0就+1
         version.setNum(sj);
 //        log.error("1/0,,,,");
-//        int i = 1 / 0;
+        int i = 1 / sj;
+        log.info("version : {}", JSONObject.toJSONString(version));
         versionService.saveVersion(version);
     }
 

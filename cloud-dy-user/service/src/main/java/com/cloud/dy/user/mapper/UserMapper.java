@@ -1,11 +1,15 @@
 package com.cloud.dy.user.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cloud.dy.user.entity.User;
 import com.cloud.dy.user.entity.UserExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
-public interface UserMapper {
+import java.util.List;
+
+//@Repository
+public interface UserMapper extends BaseMapper<User> {
     long countByExample(UserExample example);
 
     int deleteByExample(UserExample example);

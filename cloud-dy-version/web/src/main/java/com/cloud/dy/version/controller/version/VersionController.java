@@ -2,6 +2,7 @@ package com.cloud.dy.version.controller.version;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.dy.common.utils.R;
+import com.cloud.dy.version.entity.Version;
 import com.cloud.dy.version.service.VersionExtService;
 import com.cloud.dy.version.service.VersionService;
 import com.cloud.dy.versionapi.param.GetVersionParam;
@@ -40,7 +41,9 @@ public class VersionController {
     @ResponseBody
     public R<Boolean> saveVersion(@RequestBody SaveVersionParam saveVersionParam) {
         log.info("save -- param : {}", JSONObject.toJSONString(saveVersionParam));
-        versionExtService.saveVersion(null);
+        Version version = new Version();
+        version.setVersion(saveVersionParam.getVersion());
+        versionExtService.saveVersion(version);
         return R.successResponse(Boolean.TRUE);
     }
 

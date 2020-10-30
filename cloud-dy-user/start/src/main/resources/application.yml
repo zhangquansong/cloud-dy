@@ -1,0 +1,68 @@
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  shardingsphere:
+    datasource:
+      master0:
+        driver-class-name: com.mysql.jdbc.Driver #com.mysql.cj.jdbc.Driver
+        password: Songmei11
+        type: com.zaxxer.hikari.HikariDataSource #com.alibaba.druid.pool.DruidDataSource
+        jdbc-url: jdbc:mysql://rm-8vb9p9sf9i777kv2k7o.mysql.zhangbei.rds.aliyuncs.com:3306/ms0?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+        username: cloud_dy_mysql
+      master1:
+        driver-class-name: com.mysql.jdbc.Driver #com.mysql.cj.jdbc.Driver
+        password: Songmei11
+        type: com.zaxxer.hikari.HikariDataSource #com.alibaba.druid.pool.DruidDataSource
+        jdbc-url: jdbc:mysql://rm-8vb9p9sf9i777kv2k7o.mysql.zhangbei.rds.aliyuncs.com:3306/ms1?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+        username: cloud_dy_mysql
+      names: master0,slave0,master1,slave1
+      slave0:
+        driver-class-name: com.mysql.jdbc.Driver #com.mysql.cj.jdbc.Driver
+        password: Songmei11
+        type: com.zaxxer.hikari.HikariDataSource #com.alibaba.druid.pool.DruidDataSource
+        jdbc-url: jdbc:mysql://rm-8vb9p9sf9i777kv2k7o.mysql.zhangbei.rds.aliyuncs.com:3306/sl0?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+        username: cloud_dy_mysql
+      slave1:
+        driver-class-name: com.mysql.jdbc.Driver #com.mysql.cj.jdbc.Driver
+        password: Songmei11
+        type: com.zaxxer.hikari.HikariDataSource #com.alibaba.druid.pool.DruidDataSource
+        jdbc-url: jdbc:mysql://rm-8vb9p9sf9i777kv2k7o.mysql.zhangbei.rds.aliyuncs.com:3306/sl1?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+        username: cloud_dy_mysql
+    props:
+      sql:
+        show: true
+    sharding:
+      default-database-strategy:
+        inline:
+          algorithm-expression: master$->{user_sex % 2}
+          sharding-column: user_sex
+      master-slave-rules:
+        master0:
+          master-data-source-name: master0
+          slave-data-source-names: slave0
+        master1:
+          master-data-source-name: master1
+          slave-data-source-names: slave1
+      tables:
+        user:
+          actual-data-nodes: master$->{0..1}.user_$->{0..1}
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+          table-strategy:
+            inline:
+              algorithm-expression: user_$->{id % 2}
+              sharding-column: id
+
+
+mybatis-plus:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: com.cloud.dy.user.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
