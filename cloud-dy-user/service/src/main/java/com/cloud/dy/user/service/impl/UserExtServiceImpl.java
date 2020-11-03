@@ -48,5 +48,4 @@ public class UserExtServiceImpl implements UserExtService {
 //        Integer i = 1 / 0;
         return R.successResponse();
     }
-
 }

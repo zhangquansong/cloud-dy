@@ -2,6 +2,8 @@ package com.cloud.dy.user.service;
 
 import com.cloud.dy.user.entity.User;
 
+import java.util.List;
+
 /**
  * @author zhangquansong
  * @title: UserService
@@ -12,4 +14,6 @@ import com.cloud.dy.user.entity.User;
 public interface UserService {
 
     Integer saveUser(User user);
+
+    List<User> list();
 }

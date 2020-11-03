@@ -1,11 +1,15 @@
 package com.cloud.dy.user.controller.user;
 
 import com.cloud.dy.common.utils.R;
+import com.cloud.dy.user.entity.User;
 import com.cloud.dy.user.service.UserExtService;
+import com.cloud.dy.user.service.UserService;
 import com.cloud.dy.versionapi.param.SaveVersionParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Author zhangquansong
@@ -20,6 +24,9 @@ public class UserController {
     @Autowired
     private UserExtService userExtService;
 
+    @Autowired
+    private UserService userService;
+
 
     @PostMapping("/saveVersion")
     @ResponseBody
@@ -28,4 +35,9 @@ public class UserController {
     }
 
 
+    @GetMapping("/list")
+    @ResponseBody
+    public List<User> list() {
+        return userService.list();
+    }
 }

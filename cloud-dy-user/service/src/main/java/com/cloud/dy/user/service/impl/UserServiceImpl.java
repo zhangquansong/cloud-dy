@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Author zhangquansong
  * @Date 21:24 2020/3/7
@@ -31,5 +33,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer saveUser(User user) {
         return userMapper.insert(user);
+    }
+
+    @Override
+    public List<User> list() {
+        return userMapper.selectList(null);
     }
 }
