@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.extension.plugins.tenant.TenantSqlParser;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
-import net.sf.jsqlparser.expression.StringValue;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,6 +25,7 @@ import java.util.List;
  */
 @Slf4j
 @Configuration
+@RefreshScope
 public class MybatisPlusConfig {
 
     @Value("${my.tenantId.tableFilter.list}")

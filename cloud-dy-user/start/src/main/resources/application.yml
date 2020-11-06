@@ -36,8 +36,8 @@ spring:
     sharding:
       default-database-strategy:
         inline:
-          algorithm-expression: master$->{user_sex % 2}
-          sharding-column: user_sex
+          algorithm-expression: master$->{id % 2}
+          sharding-column: id
       master-slave-rules:
         master0:
           master-data-source-name: master0
@@ -53,8 +53,8 @@ spring:
             type: SNOWFLAKE
           table-strategy:
             inline:
-              algorithm-expression: user_$->{id % 2}
-              sharding-column: id
+              algorithm-expression: user_$->{user_sex % 2}
+              sharding-column: user_sex
 
 
 mybatis-plus:

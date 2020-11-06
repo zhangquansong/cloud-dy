@@ -1,7 +1,9 @@
 package com.cloud.dy.user.controller.user;
 
 import com.cloud.dy.common.utils.R;
+import com.cloud.dy.user.entity.UndoLog;
 import com.cloud.dy.user.entity.User;
+import com.cloud.dy.user.mapper.UndoLogDao;
 import com.cloud.dy.user.service.UserExtService;
 import com.cloud.dy.user.service.UserService;
 import com.cloud.dy.versionapi.param.SaveVersionParam;
@@ -27,6 +29,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UndoLogDao undoLogDao;
 
     @PostMapping("/saveVersion")
     @ResponseBody
@@ -39,5 +43,12 @@ public class UserController {
     @ResponseBody
     public List<User> list() {
         return userService.list();
+    }
+
+
+    @GetMapping("/undoLog/list")
+    @ResponseBody
+    public UndoLog undoLog() {
+        return undoLogDao.selectByPrimaryKey(null);
     }
 }

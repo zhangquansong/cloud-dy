@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.dy.user.mapper.UndoLogDao">
+  <resultMap id="BaseResultMap" type="com.cloud.dy.user.entity.UndoLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="branch_id" jdbcType="BIGINT" property="branchId" />
+    <result column="xid" jdbcType="VARCHAR" property="xid" />
+    <result column="context" jdbcType="VARCHAR" property="context" />
+    <result column="log_status" jdbcType="INTEGER" property="logStatus" />
+    <result column="log_created" jdbcType="TIMESTAMP" property="logCreated" />
+    <result column="log_modified" jdbcType="TIMESTAMP" property="logModified" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cloud.dy.user.entity.UndoLog">
+    <result column="rollback_info" jdbcType="BLOB" property="rollbackInfo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, branch_id, xid, context, log_status, log_created, log_modified
+  </sql>
+  <sql id="Blob_Column_List">
+    rollback_info
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from undo_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from undo_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.cloud.dy.user.entity.UndoLog" useGeneratedKeys="true">
+    insert into undo_log (branch_id, xid, context, 
+      log_status, log_created, log_modified, 
+      rollback_info)
+    values (#{branchId,jdbcType=BIGINT}, #{xid,jdbcType=VARCHAR}, #{context,jdbcType=VARCHAR}, 
+      #{logStatus,jdbcType=INTEGER}, #{logCreated,jdbcType=TIMESTAMP}, #{logModified,jdbcType=TIMESTAMP}, 
+      #{rollbackInfo,jdbcType=BLOB})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.cloud.dy.user.entity.UndoLog" useGeneratedKeys="true">
+    insert into undo_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="branchId != null">
+        branch_id,
+      </if>
+      <if test="xid != null">
+        xid,
+      </if>
+      <if test="context != null">
+        context,
+      </if>
+      <if test="logStatus != null">
+        log_status,
+      </if>
+      <if test="logCreated != null">
+        log_created,
+      </if>
+      <if test="logModified != null">
+        log_modified,
+      </if>
+      <if test="rollbackInfo != null">
+        rollback_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="branchId != null">
+        #{branchId,jdbcType=BIGINT},
+      </if>
+      <if test="xid != null">
+        #{xid,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null">
+        #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="logStatus != null">
+        #{logStatus,jdbcType=INTEGER},
+      </if>
+      <if test="logCreated != null">
+        #{logCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logModified != null">
+        #{logModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rollbackInfo != null">
+        #{rollbackInfo,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cloud.dy.user.entity.UndoLog">
+    update undo_log
+    <set>
+      <if test="branchId != null">
+        branch_id = #{branchId,jdbcType=BIGINT},
+      </if>
+      <if test="xid != null">
+        xid = #{xid,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null">
+        context = #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="logStatus != null">
+        log_status = #{logStatus,jdbcType=INTEGER},
+      </if>
+      <if test="logCreated != null">
+        log_created = #{logCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logModified != null">
+        log_modified = #{logModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rollbackInfo != null">
+        rollback_info = #{rollbackInfo,jdbcType=BLOB},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cloud.dy.user.entity.UndoLog">
+    update undo_log
+    set branch_id = #{branchId,jdbcType=BIGINT},
+      xid = #{xid,jdbcType=VARCHAR},
+      context = #{context,jdbcType=VARCHAR},
+      log_status = #{logStatus,jdbcType=INTEGER},
+      log_created = #{logCreated,jdbcType=TIMESTAMP},
+      log_modified = #{logModified,jdbcType=TIMESTAMP},
+      rollback_info = #{rollbackInfo,jdbcType=BLOB}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cloud.dy.user.entity.UndoLog">
+    update undo_log
+    set branch_id = #{branchId,jdbcType=BIGINT},
+      xid = #{xid,jdbcType=VARCHAR},
+      context = #{context,jdbcType=VARCHAR},
+      log_status = #{logStatus,jdbcType=INTEGER},
+      log_created = #{logCreated,jdbcType=TIMESTAMP},
+      log_modified = #{logModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

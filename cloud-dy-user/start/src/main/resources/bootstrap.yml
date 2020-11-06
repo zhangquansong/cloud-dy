@@ -32,6 +32,6 @@ spring:
 #  sentinel:
 #    enabled: true
 
-logging:
-  level:
-    org.springframework.web.servlet: trace
+#logging:
+#  level:
+#    org.springframework.web.servlet: trace
